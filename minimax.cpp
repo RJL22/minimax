@@ -1,63 +1,8 @@
+#include "minimax.h"
+
 #include <vector>
 #include <iostream>
 
-struct Node
-{
-public:
-	Node * parent_;
-	int value_;
-	std::vector<Node*> leaves_;
-	bool solveState_;
-
-public:
-	//Initialization and deinitialization
-	Node(int value)
-	{
-		value_ = value;
-		parent_ = nullptr;
-		solveState_ = true;
-	}
-
-	~Node() 
-	{
-		for (int i = 0; i < leaves_.size(); i++)
-			delete leaves_[i];
-	}
-
-	//Setters
-	void setParent(Node * parent) { parent_ = parent; }
-	void setValue(int value) { value_ = value; }
-	void setSolveState(bool s) { solveState_ = s; }
-
-
-	// Getters
-	Node * getParent() { return parent_; }
-	int getValue() { return value_; }
-	std::vector<Node*> getLeaves() {return leaves_; }
-	bool getSolveState() { return solveState_; }
-
-	//Adding Leaves
-	void addLeaf(int value)
-	{
-		Node * leaf = new Node(value);
-		leaf->setParent(this);
-
-		// (*parent_).getValue();
-		if (this->getParent() != nullptr)
-			this->getParent()->setSolveState(false);
-
-		leaves_.push_back(leaf);
-	}
-
-	bool hasLeaves()
-	{
-		if (leaves_.size() == 0)
-			return false;
-	}
-};
-
-
-void max_alg(Node& node); 
 
 void min_alg(Node& node)
 {
